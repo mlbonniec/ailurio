@@ -25,10 +25,11 @@ export default async function (app: FastifyInstance, _opts: FastifyServerOptions
 			forks_count: forks,
 		} = await gh.getRepository();
 		
-		// Fix Github / TS typing error
+		// TODO: Fix Github / TS typing error
 		const user = _user as Exclude<components['schemas']['simple-user'], null>
 		
-		const contributors = await gh.getContributorsCount();
+		// TODO: Request all other pages, because it returns only 30 contributors per page
+		// const contributors = await gh.getContributorsCount();
 		const languagesList = await gh.getLanguages();
 		const avatar = await gh.getAvatar(user);
 
@@ -39,8 +40,10 @@ export default async function (app: FastifyInstance, _opts: FastifyServerOptions
 			languages: languages(languagesList),
 			avatar,
 			data: {
-				contributors: true,
-				issues: true
+				// contributors,
+				issues,
+				forks,
+				stars
 			}
 		});
 		await img.init();

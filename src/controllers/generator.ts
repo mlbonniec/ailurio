@@ -3,7 +3,7 @@ import { join } from 'path';
 import type { TransformedLanguages } from 'types/languages';
 import Image from './image';
 
-type Data = Partial<Record<keyof typeof Icons, boolean>>;
+type Data = Partial<Record<keyof typeof Icons, number>>;
 
 interface IGenerator {
 	author: string;
@@ -94,28 +94,35 @@ export default class Generator extends Image {
 		await this.drawImage(avatar, 915, 85, 200, 200);
 	}
 	
-	private async drawData(data: Data): Promise<void> {
-		// console.log(data);
-		// 85 450
-		const image = readFileSync(join(__dirname, Icons.contributors.path))
-		
-		await this.drawImage(image, 85, 450);
-		this.drawText('226', 130, 450, {
-			color: '#2a2f35',
-			font: {
-				size: 30,
-				family: 'sans-serif',
-			}
-		});
-		
-		this.drawText(Icons.contributors.name, 130, 485, {
-			color: '#616975',
-			font: {
-				size: 25,
-				family: 'sans-serif',
-				weight: 'lighter'
-			}
-		});
+	private drawData(data: Data): void {
+		let x = 85;
+		for (const e of Object.entries(data)) {
+			const [key, value] = e as [keyof typeof Icons, number | undefined];
+			if (value === undefined)
+				return;
+
+			const image = readFileSync(join(__dirname, Icons[key].path));
+
+			this.drawImage(image, x, 450);			
+			this.drawText(value.toString(), x+45, 450, {
+				color: '#2a2f35',
+				font: {
+					size: 30,
+					family: 'sans-serif',
+				}
+			});
+
+			const { width } = this.drawText(Icons[key].name, x+45, 485, {
+				color: '#616975',
+				font: {
+					size: 25,
+					family: 'sans-serif',
+					weight: 'lighter'
+				}
+			});
+
+			x += (width + 75)
+		}
 	}
 	
 	public async init(): Promise<void> {
@@ -126,10 +133,8 @@ export default class Generator extends Image {
 		this.drawRepositoryName(repository);
 		this.drawDescription(description);
 		this.drawLanguages(languages);
+		this.drawData(data);
 
-		// await this.drawImage('../assets/icons/contributors.svg', 85, 465);
-		// await this.drawImage('https://avatars.githubusercontent.com/u/29955402?v=4', 85, 465);
 		await this.drawAvatar(avatar);
-		await this.drawData(data);
 	}
 }

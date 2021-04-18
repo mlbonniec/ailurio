@@ -28,7 +28,7 @@ export default class Image {
 		this.context.fillRect(x, y, width, height);
 	}
 	
-	public drawText(text: string, x: number, y: number, options?: TextOptions): void {		
+	public drawText(text: string, x: number, y: number, options?: TextOptions): TextMetrics {		
 		if (options?.color)
 			this.context.fillStyle = options.color;
 
@@ -39,6 +39,8 @@ export default class Image {
 
 		this.context.textBaseline = 'top';
 		this.context.fillText(text, x, y);
+		
+		return this.context.measureText(text);
 	}
 	
 	public drawMultilineText(text: string, x: number, y: number, options?: TextOptions & { lineHeight?: number } ): void {
