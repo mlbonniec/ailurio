@@ -25,9 +25,12 @@ The data is retrieved from the Github API, using the official Github client for 
 
 ## To-do
 
-- [ ] Catch errors, for instance when owner or repo doesn't exists.
-- [ ] Display contributors (*currently disabled due to Github pagination system*).
+- [ ] Catch errors
+  - [ ] Unexisting owner or repository
+  - [ ] Rate limit
+- [ ] Display contributors (*currently disabled due to GitHub pagination system*).
 - [ ] Support issues
 - [ ] Support commits
 - [ ] Support pull requests
 - [ ] Add caching system
+- [ ] Fix too long descriptions
