@@ -1,4 +1,4 @@
-import { createCanvas } from 'canvas';
+import { createCanvas, loadImage } from 'canvas';
 import canvasTxt from 'canvas-txt';
 
 interface TextOptions {
@@ -52,5 +52,11 @@ export default class Image {
 		canvasTxt.lineHeight = options?.lineHeight ? canvasTxt.fontSize * options?.lineHeight : null;
 		
 		canvasTxt.drawText(this.context, text, x, y, 700, 200);
+	}
+	
+	public async drawImage(buffer: Buffer, x: number, y: number, width?: number, height?: number): Promise<void> {
+		const image = await loadImage(buffer);
+
+		this.context.drawImage(image, x, y, width ?? image.width, height ?? image.height);
 	}
 }
