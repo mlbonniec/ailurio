@@ -318,13 +318,10 @@ const colors: Colors = {
 }
 
 function ratio(languages: GithubLanguages): Record<string, number> {
-	const { values: ov, fromEntries: ofe, entries: oe } = Object;
-
-  // Remove undefined values, due to TypeScript optionnal properties of objects
-	const total = ov(languages).reduce((previous, current) => previous + current);
+	const total = Object.values(languages).reduce((previous, current) => previous + current);
 
   // Set languages ratio to 100
-  oe(languages).forEach(([language, ratio]) => languages[language] = ratio/total*100);
+  Object.entries(languages).forEach(([language, ratio]) => languages[language] = ratio/total*100);
   
   return languages;
 }
