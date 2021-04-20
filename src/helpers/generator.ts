@@ -1,3 +1,4 @@
+import { registerFont } from 'canvas';
 import { readFileSync } from 'fs';
 import { join } from 'path';
 import type { TransformedLanguages } from 'types/languages';
@@ -48,7 +49,7 @@ export default class Generator extends Image {
 		
 		this.options = options;
 	}
-	
+
 	private drawBackground(): void {
 		this.drawRectangle(0, 0, this.canvas.width, this.canvas.height, '#fff');
 	}
@@ -113,6 +114,7 @@ export default class Generator extends Image {
 				return;
 
 			const image = readFileSync(join(__dirname, Icons[key].path));
+			const formattedValue = Intl.NumberFormat('en', { notation: 'compact' }).format(value);
 
 			this.drawImage(image, x, 480);
 			this.drawText(formattedValue, x+45, 475, {
@@ -133,7 +135,7 @@ export default class Generator extends Image {
 				}
 			});
 
-			x += (width + 75)
+			x += (width + 75);
 		}
 	}
 	
@@ -143,11 +145,10 @@ export default class Generator extends Image {
 		this.drawBackground();
 		this.drawAuthorName(author);
 		this.drawRepositoryName(repository);
-		this.drawDescription(description);
 		this.drawLanguages(languages);
-		this.drawData(data);
 
 		await this.drawDescription(description);
+		await this.drawData(data);
 		await this.drawAvatar(avatar);
 	}
 }
