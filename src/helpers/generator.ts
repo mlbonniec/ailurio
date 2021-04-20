@@ -37,6 +37,13 @@ export default class Generator extends Image {
 	private options: IGenerator;
 
 	constructor(options: IGenerator) {
+		const getFontPath = (filename: string): string => join(__dirname, '../assets/fonts/', filename);
+
+		// TODO: Fix wrong font weight
+		registerFont(getFontPath('SF-Pro-Display-Light.otf'), { family: 'SFProDisplay', weight: '300' });
+		registerFont(getFontPath('SF-Pro-Display-Regular.otf'), { family: 'SFProDisplay', weight: 'normal' });
+		registerFont(getFontPath('SF-Pro-Display-Bold.otf'), { family: 'SFProDisplay', weight: '700' });
+
 		super(1200, 600);
 		
 		this.options = options;
@@ -47,33 +54,37 @@ export default class Generator extends Image {
 	}
 	
 	private drawAuthorName(author: string): void {
-		this.drawText(`${author}/`, 85, 100, {
+		this.drawText(`${author}/`, 85, 85, {
 			color: '#2a2f35',
 			font: {
 				size: 75,
-				family: 'sans-serif',
+				family: 'SFProDisplay',
+				weight: 300
 			},
 		});
 	}
 	
 	private drawRepositoryName(repository: string): void {
-		this.drawText(repository, 85, 185, {
+		this.drawText(repository, 85, 170, {
 			color: '#2a2f35',
 			font: {
 				size: 75,
-				family: 'sans-serif',
-				weight: 'bold',
+				family: 'SFProDisplay',
+				weight: 700
 			},
 		});
 	}
 	
-	private drawDescription(description: string): void {
-		this.drawMultilineText(description, 85, 300, {
+	private async drawDescription(description: string): Promise<void> {
+		await this.drawMultilineText(description, 85, 285, {
 			color: '#616975',
 			lineHeight: 1.25,
+			width: 700,
+			maxLine: 3,
 			font: {
 				size: 35,
-				family: 'sans-serif',
+				family: 'SFProDisplay',
+				weight: 300
 			}
 		});
 	}
@@ -94,7 +105,7 @@ export default class Generator extends Image {
 		await this.drawImage(avatar, 915, 85, 200, 200);
 	}
 	
-	private drawData(data: Data): void {
+	private async drawData(data: Data): Promise<void> {
 		let x = 85;
 		for (const e of Object.entries(data)) {
 			const [key, value] = e as [keyof typeof Icons, number | undefined];
@@ -103,21 +114,22 @@ export default class Generator extends Image {
 
 			const image = readFileSync(join(__dirname, Icons[key].path));
 
-			this.drawImage(image, x, 450);			
-			this.drawText(value.toString(), x+45, 450, {
+			this.drawImage(image, x, 480);
+			this.drawText(formattedValue, x+45, 475, {
 				color: '#2a2f35',
 				font: {
 					size: 30,
-					family: 'sans-serif',
+					family: 'SFProDisplay',
+					weight: 300
 				}
 			});
 
-			const { width } = this.drawText(Icons[key].name, x+45, 485, {
+			const width = await this.drawText(Icons[key].name, x+45, 510, {
 				color: '#616975',
 				font: {
 					size: 25,
-					family: 'sans-serif',
-					weight: 'lighter'
+					family: 'SFProDisplay',
+					weight: 300
 				}
 			});
 
@@ -135,6 +147,7 @@ export default class Generator extends Image {
 		this.drawLanguages(languages);
 		this.drawData(data);
 
+		await this.drawDescription(description);
 		await this.drawAvatar(avatar);
 	}
 }
