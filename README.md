@@ -16,7 +16,7 @@ The design and functionality are inspired by a new GitHub feature, which dynamic
 When you make a `GET` request at `/mlbonniec/bild`, you'll get an image like this one. Displaying your repository statistics.  
 You can create images for any GitHub repository.
 
-![bild](https://user-images.githubusercontent.com/29955402/115162669-1c503a80-a0a5-11eb-8f1a-fab2c3f4967a.png)
+![bild](https://user-images.githubusercontent.com/29955402/115451603-b1763f00-a21d-11eb-842e-27c10cd9d635.png)
 
 ## Functioning
 
