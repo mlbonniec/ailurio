@@ -26,7 +26,7 @@ The data is retrieved from the GitHub API, using the official GitHub client for 
 ## To-do
 
 - [ ] Catch errors
-  - [ ] Unexisting owner or repository
+  - [x] Unexisting owner or repository
   - [ ] Rate limit
 - [ ] Display contributors (*currently disabled due to GitHub pagination system*).
 - [ ] Support issues
