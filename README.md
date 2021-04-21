@@ -34,3 +34,4 @@ The data is retrieved from the GitHub API, using the official GitHub client for 
 - [ ] Support pull requests
 - [ ] Add caching system
 - [x] Fix too long descriptions
+- [ ] Fix build script
