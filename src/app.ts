@@ -8,7 +8,7 @@ const app = fastify({ logger });
 // Routes
 app.register(AutoLoad, {
   dir: join(__dirname, 'routes'),
-  dirNameRoutePrefix: false,
+  dirNameRoutePrefix: false
 });
 
 app.listen(Number(process.env.PORT));
