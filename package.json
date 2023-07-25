@@ -32,20 +32,20 @@
   },
   "homepage": "https://github.com/mlbonniec/ailurio#readme",
   "devDependencies": {
-    "@octokit/types": "^6.13.0",
-    "@types/node": "^14.14.37",
-    "ts-node-dev": "^1.1.6",
-    "tsconfig-paths": "^3.9.0",
-    "typescript": "^4.2.4"
+    "@octokit/types": "^11.1.0",
+    "@types/node": "^20.4.5",
+    "ts-node-dev": "^2.0.0",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.1.6"
   },
   "dependencies": {
-    "@octokit/rest": "^18.5.2",
-    "axios": "^0.21.1",
-    "canvas": "^2.7.0",
-    "dotenv": "^8.2.0",
-    "fastify": "^3.14.2",
-    "fastify-autoload": "^3.7.1",
+    "@fastify/autoload": "^5.7.1",
+    "@octokit/rest": "^20.0.1",
+    "axios": "^1.4.0",
+    "canvas": "^2.11.2",
+    "dotenv": "^16.3.1",
+    "fastify": "^4.20.0",
     "node-canvas-with-twemoji-and-discord-emoji": "^1.2.1",
-    "pino-pretty": "^4.7.1"
+    "pino-pretty": "^10.2.0"
   }
 }
