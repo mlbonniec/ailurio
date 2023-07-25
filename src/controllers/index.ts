@@ -1,4 +1,4 @@
-import languages from '@helpers/languages';
+import { getLanguages } from '@helpers/languages';
 import Github from '@models/github';
 import Generator from '@helpers/generator';
 import type { components } from '@octokit/openapi-types'

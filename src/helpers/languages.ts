@@ -1,4 +1,4 @@
-import type { Colors, GithubLanguages } from 'types/languages';
+import type { Colors, GithubLanguages, TransformedLanguages } from 'types/languages';
 
 const colors: Colors = {
   '1C Enterprise': '#814CCC',
@@ -322,11 +322,11 @@ function ratio(languages: GithubLanguages): Record<string, number> {
 
   // Set languages ratio to 100
   Object.entries(languages).forEach(([language, ratio]) => languages[language] = ratio/total*100);
-  
+
   return languages;
 }
 
-export default function getLanguages(languages: GithubLanguages) {
+export function getLanguages(languages: GithubLanguages): TransformedLanguages {
 	// Convert ratio to percent
   const percentages = ratio(languages);
 
