@@ -32,12 +32,19 @@ export async function getRepository(request: FastifyRequest<RepositoryParams>, r
 		// const contributors = await gh.getContributorsCount();
 		const languagesList = await gh.getLanguages();
 		const avatar = await gh.getAvatar(user);
-	
+
+		const filteredLanguages: {[p: string]: number} = {};
+
+		for (const [key, value] of Object.entries(languagesList)) {
+			if (value !== undefined)
+				filteredLanguages[key] = value;
+		}
+
 		const img = new Generator({
 			author: user.login,
 			repository: name,
 			description: description || '',
-			languages: languages(languagesList),
+			languages: getLanguages(filteredLanguages),
 			avatar,
 			data: {
 				// contributors,
