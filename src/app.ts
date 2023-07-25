@@ -1,5 +1,5 @@
 import fastify from 'fastify';
-import AutoLoad from 'fastify-autoload';
+import AutoLoad from '@fastify/autoload';
 import logger from '@config/logger';
 import { join } from 'path';
 
