@@ -3,3 +3,6 @@ dist
 
 .DS_STORE
 .env
+
+.idea
+.vscode
