@@ -3,7 +3,6 @@ import Github from '@models/github';
 import Generator from '@helpers/generator';
 import type { components } from '@octokit/openapi-types'
 import type { FastifyReply, FastifyRequest, RequestGenericInterface } from 'fastify';
-import type { RequestError } from '@octokit/types';
 
 interface RepositoryParams extends RequestGenericInterface {
 	Params: {
