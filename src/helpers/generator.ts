@@ -13,7 +13,7 @@ interface IGenerator {
 	languages: TransformedLanguages;
 	avatar: Buffer;
 	data: Data
-};
+}
 
 const Icons = {
 	contributors: {
