@@ -13,10 +13,10 @@ The design and functionality are inspired by a new GitHub feature, which dynamic
 
 ## Preview
 
-When you make a `GET` request at `/mlbonniec/bild`, you'll get an image like this one. Displaying your repository statistics.  
+When you make a `GET` request at `/mlbonniec/OnBoardingKit`, you'll get an image like this one. Displaying your repository statistics.  
 You can create images for any GitHub repository.
 
-![bild](https://user-images.githubusercontent.com/29955402/115451603-b1763f00-a21d-11eb-842e-27c10cd9d635.png)
+[![OnBoardingKit](./docs/demo.png)](https://github.com/mlbonniec/OnBoardingKit)
 
 ## Functioning
 
