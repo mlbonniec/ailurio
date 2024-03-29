@@ -103,7 +103,7 @@ export default class Generator extends Image {
 	}
 
 	private async drawAvatar(avatar: Buffer): Promise<void> {
-		await this.drawImage(avatar, 915, 85, 200, 200);
+		await this.drawImage(avatar, 915, 85, 200, 200, 25);
 	}
 	
 	private async drawData(data: Data): Promise<void> {

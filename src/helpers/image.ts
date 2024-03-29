@@ -82,9 +82,31 @@ export default class Image {
 			await fillTextWithTwemoji(this.context, line, x, y);
 	}
 
-	public async drawImage(buffer: Buffer, x: number, y: number, width?: number, height?: number): Promise<void> {
+	public async drawImage(buffer: Buffer, x: number, y: number, width?: number, height?: number, radius: number = 0): Promise<void> {
 		const image = await loadImage(buffer);
+		const finalWidth = width ?? image.width;
+		const finalHeight = height ?? image.height;
 
-		this.context.drawImage(image, x, y, width ?? image.width, height ?? image.height);
+		if (radius > 0)
+			this.roundedImage(x, y, finalWidth, finalHeight, radius);
+
+		this.context.drawImage(image, x, y, finalWidth, finalHeight);
+		this.context.restore();
 	}
+
+	public roundedImage(x: number, y: number, width: number, height: number, radius: number) {
+		this.context.save();
+		this.context.beginPath();
+		this.context.moveTo(x + radius, y);
+		this.context.lineTo(x + width - radius, y);
+		this.context.quadraticCurveTo(x + width, y, x + width, y + radius);
+		this.context.lineTo(x + width, y + height - radius);
+		this.context.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+		this.context.lineTo(x + radius, y + height);
+		this.context.quadraticCurveTo(x, y + height, x, y + height - radius);
+		this.context.lineTo(x, y + radius);
+		this.context.quadraticCurveTo(x, y, x + radius, y);
+		this.context.closePath();
+		this.context.clip();
+	  }
 }
