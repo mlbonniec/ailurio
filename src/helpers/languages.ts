@@ -274,7 +274,7 @@ const colors: Colors = {
   SuperCollider: '#46390b',
   Svelte: '#ff3e00',
   SVG: '#ff9900',
-  Swift: '#ffac45',
+  Swift: '#f05138',
   SystemVerilog: '#DAE1C2',
   Tcl: '#e4cc98',
   Terra: '#00004c',
